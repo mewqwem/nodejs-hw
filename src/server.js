@@ -49,6 +49,10 @@ app.get('/notes/:noteId', (req, res) => {
   });
 });
 
+app.get('/test-error', () => {
+  throw new Error('Simulated server error');
+});
+
 //! 404
 app.use((req, res) => {
   res.status(404).json({
@@ -57,10 +61,6 @@ app.use((req, res) => {
 });
 
 //! error
-app.get('/test-error', () => {
-  throw new Error('Simulated server error');
-});
-
 app.use((err, req, res, next) => {
   console.error(err);
 
