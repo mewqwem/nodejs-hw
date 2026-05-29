@@ -4,6 +4,8 @@ import 'dotenv/config';
 
 import { connectMongoDB } from './db/connectMongoDB.js';
 
+import { errors } from 'celebrate';
+
 import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
@@ -23,6 +25,9 @@ app.use(cors());
 
 //! routes
 app.use(notesRoutes);
+
+//! celebrate errors handler
+app.use(errors());
 
 //! 404
 app.use(notFoundHandler);
