@@ -13,29 +13,13 @@ import {
   updateNoteSchema,
 } from '../validations/notesValidation.js';
 import { authenticate } from '../middleware/authenticate.js';
-import { celebrate } from 'celebrate';
 
 const router = Router();
 
-router.get('/notes', authenticate, celebrate(getAllNotesSchema), getAllNotes);
-router.get(
-  '/notes/:noteId',
-  authenticate,
-  celebrate(noteIdSchema),
-  getNoteById,
-);
-router.post('/notes', authenticate, celebrate(createNoteSchema), createNote);
-router.delete(
-  '/notes/:noteId',
-  authenticate,
-  celebrate(noteIdSchema),
-  deleteNote,
-);
-router.patch(
-  '/notes/:noteId',
-  authenticate,
-  celebrate(updateNoteSchema),
-  updateNote,
-);
+router.get('/notes', authenticate, getAllNotesSchema, getAllNotes);
+router.get('/notes/:noteId', authenticate, noteIdSchema, getNoteById);
+router.post('/notes', authenticate, createNoteSchema, createNote);
+router.delete('/notes/:noteId', authenticate, noteIdSchema, deleteNote);
+router.patch('/notes/:noteId', authenticate, updateNoteSchema, updateNote);
 
 export default router;
